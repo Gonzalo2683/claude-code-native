@@ -25,6 +25,27 @@ ddev claude
 ddev claude --help
 ```
 
+### Version Control
+
+By default, the add-on installs the `stable` version of Claude Code. You can change the version by editing `.ddev/web-build/Dockerfile.claude-code-native`:
+
+```dockerfile
+# Options: stable, latest, or specific version (e.g., 1.0.58)
+ARG CLAUDE_VERSION=stable
+```
+
+After changing the version, rebuild the container:
+
+```bash
+ddev debug rebuild
+```
+
+You can also update Claude Code manually without rebuilding:
+
+```bash
+ddev claude update
+```
+
 ### GitLab Integration
 
 To let Claude interact with GitLab, you will need to authenticate `glab`. This can be done using:

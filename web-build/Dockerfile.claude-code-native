@@ -1,7 +1,10 @@
 #ddev-generated
 
+# Claude Code version: stable, latest, or specific version (e.g., 1.0.58)
+ARG CLAUDE_VERSION=stable
+
 # Install Claude Code natively (no npm dependency)
-RUN curl -fsSL https://claude.ai/install.sh | bash \
+RUN curl -fsSL https://claude.ai/install.sh | bash -s ${CLAUDE_VERSION} \
     && echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 
 # Install GitLab CLI

@@ -52,10 +52,11 @@ ddev glab auth login
 
 ## Key Design Decisions
 
-1. **Native Binary Installation**: Uses `curl -fsSL https://claude.ai/install.sh | bash` instead of npm to avoid Node.js dependency
-2. **PATH Management**: All scripts ensure `$HOME/.local/bin` is in PATH where the native binary is installed
-3. **Configuration Persistence**: Symlinks from home directory to project `.ddev` directory enable stateful configuration
-4. **GitLab CLI Bundling**: Includes glab to enable GitLab integration for Claude Code
+1. **Native Binary Installation**: Uses `curl -fsSL https://claude.ai/install.sh | bash -s ${CLAUDE_VERSION}` instead of npm to avoid Node.js dependency
+2. **Version Control**: The `CLAUDE_VERSION` ARG in the Dockerfile supports `stable`, `latest`, or specific versions (e.g., `1.0.58`). Changing the version requires `ddev debug rebuild` to invalidate Docker cache
+3. **PATH Management**: All scripts ensure `$HOME/.local/bin` is in PATH where the native binary is installed
+4. **Configuration Persistence**: Symlinks from home directory to project `.ddev` directory enable stateful configuration
+5. **GitLab CLI Bundling**: Includes glab to enable GitLab integration for Claude Code
 
 ## Important Notes
 
