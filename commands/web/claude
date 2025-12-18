@@ -8,7 +8,4 @@
 
 set -e
 
-# Ensure PATH includes native installation location
-export PATH="$HOME/.local/bin:$PATH"
-
 claude "$@"
