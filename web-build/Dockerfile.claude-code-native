@@ -4,9 +4,10 @@
 ARG CLAUDE_VERSION=stable
 
 # Install Claude Code natively (no npm dependency)
-# Note: Installs as root, then moves to /usr/local/bin for all users
+# Note: Installs as root, then copies binary (not symlink) to /usr/local/bin for all users
 RUN curl -fsSL https://claude.ai/install.sh | bash -s ${CLAUDE_VERSION} \
-    && mv /root/.local/bin/claude /usr/local/bin/claude
+    && cp -L /root/.local/bin/claude /usr/local/bin/claude \
+    && chmod +x /usr/local/bin/claude
 
 # Install GitLab CLI
 RUN curl -sSL "https://raw.githubusercontent.com/upciti/wakemeops/main/assets/install_repository" | bash && apt install -y glab
