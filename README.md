@@ -1,21 +1,19 @@
-# ddev-claude-code
+# ddev-claudecode-native
 
-## Claude Code (Native Installation)
+DDEV add-on that installs Claude Code using the **native binary** (no npm/Node.js dependency).
 
-This add-on installs Claude Code **natively** inside the DDEV container (no npm dependency). It is accessible using `ddev claude`.
+## Credits
 
-When you first run, you will be prompted to authenticate interactively. Your configuration will be stored in `.ddev/claude-code/.claude.json` and `.ddev/claude-code/.claude/`, and will be persisted across restarts.
+Based on [FreelyGive/ddev-claude-code](https://github.com/FreelyGive/ddev-claude-code), for DDEV users. This version replaces npm with the native binary installer for a smaller footprint and faster startup.
 
-You can copy in an existing `.ddev/claude-code/.claude.json`, for example if you want to use an existing key, or allowed functions etc.
-
-### Installation
+## Installation
 
 ```bash
-ddev add-on get Gonzalo2683/claude-code-native
+ddev add-on get Gonzalo2683/ddev-claudecode-native
 ddev restart
 ```
 
-### Usage
+## Usage
 
 ```bash
 # Start Claude Code
@@ -23,51 +21,39 @@ ddev claude
 
 # Get help
 ddev claude --help
+
+# Update Claude Code
+ddev claude update
 ```
 
-### Version Control
+On first run, you will be prompted to authenticate. Your configuration is persisted in `.ddev/claude-code/` across restarts.
 
-By default, the add-on installs the `stable` version of Claude Code. You can change the version by editing `.ddev/web-build/Dockerfile.claude-code-native`:
+## Version Control
+
+By default, the `latest` version is installed. To change it, edit `.ddev/web-build/Dockerfile.claude-code-native`:
 
 ```dockerfile
 # Options: stable, latest, or specific version (e.g., 1.0.58)
 ARG CLAUDE_VERSION=stable
 ```
 
-After changing the version, rebuild the container:
+Then rebuild:
 
 ```bash
 ddev debug rebuild
 ```
 
-You can also update Claude Code manually without rebuilding:
-
-```bash
-ddev claude update
-```
-
-### GitLab Integration
-
-To let Claude interact with GitLab, you will need to authenticate `glab`. This can be done using:
+## GitLab Integration
 
 ```bash
 ddev glab auth login
 ```
 
-Configuration will be stored in `.ddev/.glab-cli/` and will also be persisted across restarts.
+Configuration is persisted in `.ddev/.glab-cli/`.
 
-## Drupal CLAUDE.md
-
-For Drupal, we recommend using <https://www.drupal.org/project/claude_code>. You can install by running:
-
-```bash
-ddev composer config extra.drupal-scaffold.allowed-packages --json --merge '["drupal/claude_code"]'
-ddev composer require --dev drupal/claude_code
-```
-
-## Benefits of Native Installation
+## Benefits
 
 - **No Node.js dependency** - Self-contained binary
 - **Faster startup** - No npm overhead
-- **Auto-updates** - Claude Code manages its own updates
 - **Smaller footprint** - Single executable
+- **Version control** - Pin to stable, latest, or specific version
