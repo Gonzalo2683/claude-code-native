@@ -14,7 +14,7 @@ hooks:
     - exec: "touch /var/www/html/.ddev/claude-code/.claude.json && ln -sf /var/www/html/.ddev/claude-code/.claude.json ~/.claude.json"
     - exec: "mkdir -p /var/www/html/.ddev/claude-code/.claude && ln -sfn /var/www/html/.ddev/claude-code/.claude ~/.claude"
     # Set install method to native to avoid config mismatch warning
-    - exec: "claude config set --global installMethod native 2>/dev/null || true"
+    - exec: "~/.local/bin/claude config set --global installMethod native 2>/dev/null || true"
 
 web_environment:
   - GLAB_CONFIG_DIR=/var/www/html/.ddev/.glab-cli/
